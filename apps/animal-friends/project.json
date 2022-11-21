@@ -1,0 +1,95 @@
+{
+    "name": "animal-friends",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "apps/animal-friends/src",
+    "prefix": "animal-friends",
+    "targets": {
+        "build": {
+            "executor": "@angular-devkit/build-angular:browser",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/apps/animal-friends",
+                "index": "apps/animal-friends/src/index.html",
+                "main": "apps/animal-friends/src/main.ts",
+                "polyfills": "apps/animal-friends/src/polyfills.ts",
+                "tsConfig": "apps/animal-friends/tsconfig.app.json",
+                "inlineStyleLanguage": "scss",
+                "assets": [
+                    "apps/animal-friends/src/favicon.ico",
+                    "apps/animal-friends/src/assets"
+                ],
+                "styles": [
+                    "apps/animal-friends/src/styles.scss",
+                    "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                ],
+                "scripts": []
+            },
+            "configurations": {
+                "production": {
+                    "budgets": [{
+                            "type": "initial",
+                            "maximumWarning": "500kb",
+                            "maximumError": "1mb"
+                        },
+                        {
+                            "type": "anyComponentStyle",
+                            "maximumWarning": "2kb",
+                            "maximumError": "4kb"
+                        }
+                    ],
+                    "fileReplacements": [{
+                        "replace": "apps/animal-friends/src/environments/environment.ts",
+                        "with": "apps/animal-friends/src/environments/environment.prod.ts"
+                    }],
+                    "outputHashing": "all"
+                },
+                "development": {
+                    "buildOptimizer": false,
+                    "optimization": false,
+                    "vendorChunk": true,
+                    "extractLicenses": false,
+                    "sourceMap": true,
+                    "namedChunks": true
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "serve": {
+            "executor": "@angular-devkit/build-angular:dev-server",
+            "configurations": {
+                "production": {
+                    "browserTarget": "animal-friends:build:production"
+                },
+                "development": {
+                    "browserTarget": "animal-friends:build:development"
+                }
+            },
+            "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+            "executor": "@angular-devkit/build-angular:extract-i18n",
+            "options": {
+                "browserTarget": "animal-friends:build"
+            }
+        },
+        "lint": {
+            "executor": "@nrwl/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "apps/animal-friends/**/*.ts",
+                    "apps/animal-friends/**/*.html"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nrwl/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "apps/animal-friends/jest.config.ts",
+                "passWithNoTests": true
+            }
+        }
+    },
+    "tags": []
+}

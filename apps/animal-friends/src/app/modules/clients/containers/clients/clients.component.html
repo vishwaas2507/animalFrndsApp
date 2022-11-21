@@ -1,0 +1,20 @@
+<div [class.loading]="(loading$ | async)" id="client-list" *ngIf="!(error$ | async); else error">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="search" style="padding-top: 20px;">
+                    <div class="form-group">
+                        <label for="searchTerm"><h3>Search Client</h3></label>
+                        <input class="searchTerm" type="text" class="form-control" id="searchTerm" name="searchTerm" placeholder="Filter by client name" (keyup)="search($event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <anml-client-list [clients]="clients | async" (selectRow)="selectRow($event)">
+    </anml-client-list>
+</div>
+<ng-template #error>
+    <h2>{{(error$ | async)?.message}}</h2>
+</ng-template>

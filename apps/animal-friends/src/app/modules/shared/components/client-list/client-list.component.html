@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive table-wrap">
+                <table class="table">
+                    <thead class="thead-primary">
+                        <tr>
+                            <th colspan="3">Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>State</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="clients && clients.length > 0; else notfound">
+                            <tr *ngFor="let client of clients">
+                                <td colspan="3">
+                                    <img [src]="client.picture.thumbnail" [alt]="client.name.first" style="cursor: pointer;">
+                                    <a style="margin-left: 20px;cursor: pointer;" (click)="selectClient(client)">{{client.name.title}} {{client.name.first}} {{client.name.last }}</a>
+                                </td>
+                                <td>{{client.gender}}</td>
+                                <td>{{client.email}}</td>
+                                <td>{{client.location.state}}</td>
+                                <td>{{client.location.country}}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #notfound>
+                            <tr>
+                                <td colspan="6"><span style="color: #A81815; font-weight: 400;">Client not found</span></td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
